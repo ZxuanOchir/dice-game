@@ -1,4 +1,6 @@
 //Тоглоомын бүх газарт ашиглагдах глобаль хувьсагчдыг энд зарлая
+//Тоглоом дууссан эсэхийг хадгалах хувьсагч
+var isNewGame;
 //Аль тоглогч шоо шидэх вэ гэдгийг энд хадгална.
 var activePlayer;
 //Хоёр тоглогчийн цуглуулсан оноонууд
@@ -13,6 +15,8 @@ var diceDom = document.querySelector('.dice');
 initGame();
 //Тоглоом шинээр эхлэхэд бэлтгэе.
 function initGame(){
+    //Тоглоом эхэллээ гэдэг төлөвт оруулна.
+    isNewGame = true;
 
     //Тоглогчийн ээлжийг хадгалах хувьсагч, нэгдүгээр тоглогч 0, хоёрдугаар тоглогч 1,
     
@@ -46,7 +50,9 @@ function initGame(){
     }
     //Шоог шидэх эвент листенер
     document.querySelector(".btn-roll").addEventListener("click",function(){
-    // 1-6 хүртэлх санамсаргүй нэг тоо гаргаж авна
+        if(isNewGame){
+
+     // 1-6 хүртэлх санамсаргүй нэг тоо гаргаж авна
     var diceNumber = Math.floor(Math.random() * 6) + 1 ; 
 
     //Шооны зургийг гаргаж ирнэ
@@ -65,7 +71,9 @@ function initGame(){
         //Энэ тоглогчийн ээлжиндээ цуглуулсан оноог 0 болгоно.
         switchTheNextPlayer();//DRY Dont repeat yourself
     }
-
+}else{
+    alert('Game over click new game ');
+};
 });
 //HOLD товчны эвэнтлистэнэр 
 document.querySelector('.btn-hold').addEventListener('click',function(){
@@ -75,6 +83,7 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
     // }else{
     //     scores[1] = scores [1] + roundScore;
     // }
+   if(isNewGame){
     scores[activePlayer] = scores[activePlayer] + roundScore;
 
     //ДЭлгэц дээр тоог нь өөрчилнө.
@@ -83,6 +92,8 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
 
     //Уг тоглогч хожсож эсэхийг шалгах (Оноо нь 100 хүрсэн эсэх)
     if(scores[activePlayer] >= 10 ){
+        //Тоглоомыг дууссан төлөвт оруулна.
+        isNewGame = false;  
         //Ялагч гэсэн техтийг нэрнийх нь оронд гаргана
         document.getElementById('name-' + activePlayer).textContent = 'WINNER!';
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -91,6 +102,9 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
         //Тоглогчийн ээлжийг солино.
         switchTheNextPlayer();
     }
+   }else{
+    alert('Game over click new game ');
+   }
 
 });
 //Энэ функц нь тоглох ээлжийг дараачийн тоглогч руу шилжүүлдэг
