@@ -50,7 +50,7 @@ function initGame(){
     }
     //Шоог шидэх эвент листенер
     document.querySelector(".btn-roll").addEventListener("click",function(){
-        if(isNewGame){
+        if(isNewGame){//true
 
      // 1-6 хүртэлх санамсаргүй нэг тоо гаргаж авна
     var diceNumber = Math.floor(Math.random() * 6) + 1 ; 
@@ -91,7 +91,7 @@ document.querySelector('.btn-hold').addEventListener('click',function(){
     document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
 
     //Уг тоглогч хожсож эсэхийг шалгах (Оноо нь 100 хүрсэн эсэх)
-    if(scores[activePlayer] >= 10 ){
+    if(scores[activePlayer] >= 100 ){
         //Тоглоомыг дууссан төлөвт оруулна.
         isNewGame = false;  
         //Ялагч гэсэн техтийг нэрнийх нь оронд гаргана
