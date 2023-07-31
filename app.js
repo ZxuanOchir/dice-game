@@ -125,3 +125,4 @@ function switchTheNextPlayer(){
 }
 //Шинэ тоглоом эхлүүлэх товчний эвэнт листэнэр 
 document.querySelector(".btn-new").addEventListener('click',initGame);
+///absolutely done!
